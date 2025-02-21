@@ -13,11 +13,8 @@ public class Menu {
 	public static void main(String[] args) {
 
 		ProdutoController produtos = new ProdutoController();
-		
-		Scanner leia = new Scanner(System.in);
 
-		// Produto prod1 = new Produto(001,3, 10, "Caderno", 15.9f);
-		// prod1.visualizar();
+		Scanner leia = new Scanner(System.in);
 
 		int opcao = 0;
 		int quantidade = 0;
@@ -110,8 +107,15 @@ public class Menu {
 			case 3:
 				System.out.print("\nBuscar Produto por número\nDigite o código do produto: ");
 				codProduto = leia.nextInt();
-				produtos.buscarNaCollection(codProduto);
+				produtos.procurarPorNumero(codProduto);
 				keyPress();
+				break;
+
+			case 4:
+				System.out.print("\nAtualizar Produto: ");
+				codProduto = leia.nextInt();
+				// produtos.atualizar();;
+				// keyPress();
 				break;
 
 			case 5:

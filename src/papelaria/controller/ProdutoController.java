@@ -22,10 +22,10 @@ public class ProdutoController implements ProdutoRepository {
 		var buscaProduto = buscarNaCollection(produto.getCodProduto());
 		if (buscaProduto != null) {
 			listaProdutos.set(listaProdutos.indexOf(buscaProduto), produto);
-			System.out.println("\nA Produto numero: " + produto.getCodProduto() + " foi atualizada com sucesso!");
-		} else
-			System.out.println("\nA Produto numero: " + produto.getCodProduto() + " não foi encontrado!");
-
+			System.out.println("\nO Produto número: " + produto.getCodProduto() + " foi atualizado com sucesso!");
+		} else {
+			System.out.println("\nO Produto número: " + produto.getCodProduto() + " não foi encontrado!");
+		}
 	}
 
 	@Override
@@ -33,43 +33,42 @@ public class ProdutoController implements ProdutoRepository {
 		var produto = buscarNaCollection(numero);
 
 		if (produto != null) {
-			if (listaProdutos.remove(produto) == true)
-				System.out.println("\nA Produto numero: " + numero + " foi deletado com sucesso!");
-		} else
-			System.out.println("\nA Produto numero: " + numero + " não foi encontrado!");
-	}
-
-	@Override
-	public void listarTodos() {
-		for (var produto : listaProdutos) {
-			produto.visualizar();
+			if (listaProdutos.remove(produto)) {
+				System.out.println("\nO Produto número: " + numero + " foi deletado com sucesso!");
+			}
+		} else {
+			System.out.println("\nO Produto número: " + numero + " não foi encontrado!");
 		}
-	}
-
-	public ProdutoController() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int gerarNumero() {
-		return ++numero;
-	}
-
-	public Produto buscarNaCollection(int codProduto) {
-	    for (Produto produto : listaProdutos) {
-	        if (produto.getCodProduto() == codProduto) {
-	            return produto;
-	        }
-	    }
-	    return null; 
 	}
 
 	@Override
 	public void procurarPorNumero(int numero) {
-		// TODO Auto-generated method stub
-		
+		var produto = buscarNaCollection(numero);
+		if (produto != null) {
+			produto.visualizar();
+		} else {
+			System.out.println("\nO Produto número: " + numero + " não foi encontrado.");
+		}
 	}
 
+	@Override
+	public void listarTodos() {
+		if (listaProdutos.isEmpty()) {
+			System.out.println("\nNenhum produto cadastrado.");
+		} else {
+			for (var produto : listaProdutos) {
+				produto.visualizar();
+			}
+		}
+	}
 
-	
+	public Produto buscarNaCollection(int codProduto) {
+		for (var produto : listaProdutos) {
+			if (produto.getCodProduto() == codProduto) {
+				return produto;
+			}
+		}
+		return null;
+	}
 
 }
